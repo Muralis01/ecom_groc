@@ -1,24 +1,29 @@
 import React from 'react';
+import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
+import {  faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
     return (
-        <header className="bg-white shadow-md sticky top-0 left-0 w-full z-50">
-            <div className="flex items-center justify-between max-w-7xl mx-auto px-4 py-2">
-                <div className="text-xl font-bold">
+        <header className="header">
+            <div className="header__top">
+                <div className="header__logo">
                     <h1>My Basket</h1>
                 </div>
 
-                <div className="flex items-center gap-6">
-                    <Link to="/Cart" className="flex flex-col items-center text-sm">
-                        <FontAwesomeIcon icon={faShoppingCart} className="text-xl mb-1" aria-label="Cart" />
-                        <span>Cart</span>
+                <div className="header__actions">
+                    <Link to={'/Cart'} className="header__cart">
+                        <div className="header__cartIcon">
+                            <FontAwesomeIcon icon={faShoppingCart} aria-label="Cart" />
+                        </div>
+                        <span className="header__cartText">Cart</span>
                     </Link>
-                    <Link to="/Login" className="flex flex-col items-center text-sm">
-                        <FontAwesomeIcon icon={faUser} className="text-xl mb-1" aria-label="Login" />
-                        <span>Login</span>
+                    <Link to={'/Login'} className="header__login">
+                        <div className="header__loginIcon">
+                            <FontAwesomeIcon icon={faUser} aria-label="Login" />
+                        </div>
+                        <span className="header__loginText">Login</span>
                     </Link>
                 </div>
             </div>
