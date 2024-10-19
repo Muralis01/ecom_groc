@@ -20,7 +20,7 @@ function Login() {
       // If userCredential exists, proceed with the login
       if (userCredential.user) {
         console.log("User logged in successfully:", userCredential.user);
-        window.location.href = "/";
+        window.location.href = "/i";
         toast.success("User logged in successfully", {
           position: "top-center",
         });
@@ -32,11 +32,9 @@ function Login() {
       });
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <h3>Login</h3>
-
       <div className="mb-3">
         <label>Email address</label>
         <input
@@ -47,7 +45,6 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-
       <div className="mb-3">
         <label>Password</label>
         <input
@@ -58,7 +55,6 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-
       <div className="d-grid">
         <button onClick={handleSubmit} type="submit" className="btn btn-primary">
             submit
