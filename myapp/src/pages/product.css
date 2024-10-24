@@ -2,7 +2,7 @@
 .main-container {
     background-color: #f5f5f5;
     /* padding: 20px; */
-    margin-top: 1700px; /* Adjust this as needed */
+    margin-top:160%; /* Adjust this as needed */
 }
 
 /* Product row styling for responsive grid layout */
@@ -18,7 +18,7 @@
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,11 +47,11 @@
 
 /* Product image styling */
 .prd-img {
-    width: 100%;
-    height: auto;
+    width: 90%;
+    height: 70%;
     object-fit: cover; /* Maintain aspect ratio */
     border-radius: 8px;
-    margin-bottom: 15px; /* Space below the image */
+    margin-bottom: 19px; /* Space below the image */
 }
 
 /* Product details section */

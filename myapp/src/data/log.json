@@ -5,8 +5,7 @@
       "name": "John Doe",
       "email": "john@example.com",
       "password": "john123"
-    },
-    {
+    },{
       "id": "2",
       "name": "Jane Smith",
       "email": "jane@example.com",
@@ -59,12 +58,6 @@
       "name": "deepika",
       "email": "deepika@gmail.com",
       "password": "Wrong@123"
-    },
-    {
-      "id": "088f",
-      "name": "Jagat J L",
-      "email": "jagat2018@gmail.com",
-      "password": "Jagat@jagat123"
     }
   ]
 }

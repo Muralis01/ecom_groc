@@ -8,7 +8,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get('http://localhost:3009/products'); // Update URL
+        const response = await axios.get('http://localhost:3003/products'); // Update URL to match your server
         setCartItems(response.data); // Assuming your API returns an array of cart items
       } catch (error) {
         console.error('Error fetching cart items:', error);
@@ -19,23 +19,24 @@ const Cart = () => {
   }, []);
 
   // Function to handle removal of an item from the cart
-  const handleRemove = async (itemId) => {
-    try {
-      // Make an API call to delete the item
-      await axios.delete(`http://localhost:3009/products/${itemId}`);
-      // Update the cart items in the state after successful deletion
-      setCartItems(cartItems.filter(item => item.id !== itemId));
-      alert("Item removed from cart!");
-    } catch (error) {
-      console.error('Error removing item from cart:', error);
-    }
+  const handleRemove = (itemId) => {
+    axios
+      .delete(`http://localhost:3003/products/${itemId}`)
+      .then(() => {
+        setCartItems(cartItems.filter(item => item.id !== itemId));
+        alert("Item removed from cart!");
+      })
+      .catch((error) => {
+        console.error('Error removing item from cart:', error);
+        alert('Failed to remove item from cart.');
+      });
   };
+  
 
   const handleSaveForLater = (itemId) => {
     alert("Item saved for later!");
   };
 
-  // Function to handle placing order
   const handlePlaceOrder = (item) => {
     alert(`Order placed for ${item.name}, Quantity: ${item.quantity}, Total: ₹${item.price * item.quantity}`);
   };
@@ -46,16 +47,7 @@ const Cart = () => {
 
   return (
     <div className="cart-page">
-      {/* Header */}
-      <header className="cart-header">
-        <h2>Flipkart Plus</h2>
-        <div className="user-info">
-          <span>Muralish</span>
-        </div>
-      </header>
-
       <div className="cart-content">
-        {/* Cart Items Section */}
         <div className="cart-items-section">
           <h2>Your Cart</h2>
           {cartItems.map((item) => (
@@ -68,7 +60,6 @@ const Cart = () => {
                   <span className="original-price">₹{item.originalPrice}</span> ₹{item.price} ({item.discount}% off)
                 </p>
                 <p>Delivery by {item.deliveryDate} | ₹{item.deliveryCharge === 0 ? 'Free' : item.deliveryCharge}</p>
-                {/* Quantity selector */}
                 <div className="quantity-selector">
                   <button>-</button>
                   <input type="text" value={item.quantity} readOnly />
@@ -78,7 +69,6 @@ const Cart = () => {
                   <button onClick={() => handleSaveForLater(item.id)}>SAVE FOR LATER</button>
                   <button onClick={() => handleRemove(item.id)}>REMOVE</button>
                 </div>
-                {/* Place Order Button */}
                 <button 
                   className="place-order-button" 
                   onClick={() => handlePlaceOrder(item)}
@@ -90,7 +80,6 @@ const Cart = () => {
           ))}
         </div>
 
-        {/* Price Summary Section */}
         <div className="price-summary-section">
           <h3>PRICE DETAILS</h3>
           <div className="price-detail">

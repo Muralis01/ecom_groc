@@ -4,7 +4,7 @@ import React from "react";
  import './Footer.css';
 const Footer = () => {
     return (
-         <p class ="foot">© 2024 PeekPicks. All rights reserved.</p>
+         <p class ="foot">© 2024 My Basket. All rights reserved.</p>
     );
 }
 export default Footer;

@@ -12,8 +12,8 @@ const AllProducts = () => {
     staples: 0,
     beverages: 0,
     groceries: 0,
+    fruits: 0,  // Added for fruits
   });
-  const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -24,33 +24,16 @@ const AllProducts = () => {
     }
   }, []);
 
-  const showNextCategory = (category) => {
-    setCategoryIndex((prev) => ({
-      ...prev,
-      [category]: (prev[category] + 1) % products.filter(product => product.category === category).length,
-    }));
-  };
-
   const getDisplayedItems = (category) => {
-    const filteredItems = products.filter(product => product.category.toLowerCase() === category.toLowerCase());
+    const filteredItems = products.filter(product => product.category && product.category.toLowerCase() === category.toLowerCase());
     const totalItems = filteredItems.length;
     return Array.from({ length: itemsPerPage }, (_, i) => filteredItems[(categoryIndex[category] + i) % totalItems] || {});
   };
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const categories = ['groceries', 'snacks', 'staples', 'beverages'];
-
   // Add to Cart functionality using axios.post
   const handleAddToCart = async (product) => {
     try {
-      const response = await axios.post('http://localhost:3009/products', {
+      const response = await axios.post('http://localhost:3003/products', {
         id: product.id,
         name: product.name,
         price: product.price,
@@ -64,49 +47,11 @@ const AllProducts = () => {
       alert('Error adding product to cart. Please try again.');
     }
   };
-  
+
+  const categories = ['fruits','groceries', 'snacks', 'staples', 'beverages'];  // Added fruits category
 
   return (
     <div className="main-container">
-      {/* Search Input */}
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="search-input"
-        />
-      </div>
-
-      {/* Search Results */}
-      {searchTerm && (
-        <div className="search-results">
-          <div className="category-header">Search Results</div>
-          <div className="product-row">
-            {filteredProducts.map(item => (
-              <div className="product-card" key={item.id}>
-                <img src={item.image} alt={item.name} className="prd-img small" />
-                <div className="product-details">
-                  <h4 className="product-name">{item.name}</h4>
-                  <div className="product-price">
-                    <span className="current-price">{item.price}</span>
-                  </div>
-                  <button className="add-to-cart" onClick={() => handleAddToCart(item)}>
-                    <FontAwesomeIcon icon={faCartArrowDown} />
-                    Add to Cart
-                  </button>
-                  <button className="buy-now">
-                    <FontAwesomeIcon icon={faShoppingBag} />
-                    Buy Now
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Categories */}
       {categories.map((category) => (
         <div key={category}>
